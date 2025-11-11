@@ -86,7 +86,7 @@ function enviarOrcamento(){
     });
 
     localStorage.setItem('dadosOrcamentos', JSON.stringify(dadosOrcamentos));
-    window.location.href= "./index.html";    
+    window.location.href= "../index.html";    
 }
 
 function logar(){
@@ -102,7 +102,7 @@ function logar(){
         if(usuario == item.nome && senha == item.senha){
             sessionStorage.setItem('usuarioLogado', 'true');
             sessionStorage.setItem('nomeUsuario', usuario);
-            window.location.href="./admin/index.html";
+            window.location.href="../admin/index.html";
         }
     });
     

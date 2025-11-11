@@ -113,7 +113,7 @@ ul a li.shrink{
     position: relative;
     align-items: center;
     justify-content: center;
-    animation: slide 15s infinite ease-in-out;
+    animation: slide 20s infinite ease-in-out;
 }
 
 @keyframes slide{
@@ -177,7 +177,7 @@ ul a li.shrink{
 }
 /*Fim Portfolio */
 /* Início Orçamento */
-#orcamento {
+#aula-exp {
     max-width: 80%;
     background-color: #eee;
     margin: 40px auto;
@@ -186,7 +186,7 @@ ul a li.shrink{
     border-radius: 5px;
 }
 
-#orcamento h2{
+#aula-exp h2{
     margin: 0;
     margin-bottom: 20px;
     padding: 0;
@@ -194,6 +194,22 @@ ul a li.shrink{
 
 
 /* Fim Orçamento */
+
+/*avaliação do aluno*/
+#avaliacao-aluno {
+    max-width: 80%;
+    background-color: #eee;
+    margin: 40px auto;
+    padding: 20px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+#avaliacao-aluno h2{
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 0;
+}
 /* Início Comentários / Depoimentos */
 #comentarios {
     max-width: 100%;
@@ -208,12 +224,6 @@ ul a li.shrink{
 }
 #comentarios h2{ width: 100%;}
 
-/** 
- * 
- * Avaliação: CSS seção de comentários   
- * 
- **/
-
 .comentario{
     background-color: #FFF;
     border-radius: 10px;
@@ -225,12 +235,14 @@ ul a li.shrink{
 
 .comentario img{
     border-radius: 50%;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .textoComentario{
-    padding: 10px;
+    padding: 0px 20px;
     text-align: justify;
+    text-indent: 30px;
+    font-style: italic;
 }
 
 /* Fim Comentários / Depoimentos */
