@@ -1,118 +1,100 @@
+// ----------- MENU E LOGIN -----------
 const menu = document.querySelectorAll('nav a li');
 const btnLogin = document.getElementById('btnLogin');
 const btnFechar = document.getElementById('btnFechar');
-const formOrcamento = document.querySelector('#orcamento form');
 const login = document.getElementById('login');
-const nome = document.getElementById('nome'); 
-const email = document.getElementById('email');
-const telefone = document.getElementById('telefone');
-const duracao = document.getElementById('duracao');
-const local = document.getElementById('local');
-const tipo = document.getElementById('tipo'); 
-const impressoes = document.getElementById('impressoes'); 
-const qtdeFotos = document.getElementById('qtdeFotos');
-const detalhes = document.getElementById('detalhes');
 
 var dadosUsuarios = JSON.parse(localStorage.getItem('dadosUsuarios')) || [];
-var dadosOrcamentos = JSON.parse(localStorage.getItem('dadosOrcamentos')) || [];
 
-if(dadosUsuarios == ""){
-    let novosUsuarios = [ 
-        { nome: "user", email: "email@email.com", senha: "123" },
-        { nome: "aluno", email: "aluno@email.com", senha: "aluno" },
-        { nome: "root", email: "root@email.com", senha: "root" },
-    ];
-
-    localStorage.setItem('dadosUsuarios', JSON.stringify(novosUsuarios));
+// cria usuários iniciais
+if (dadosUsuarios.length === 0) {
+  let novosUsuarios = [
+    { nome: "user", email: "email@email.com", senha: "123" },
+    { nome: "aluno", email: "aluno@email.com", senha: "aluno" },
+    { nome: "root", email: "root@email.com", senha: "root" },
+  ];
+  localStorage.setItem('dadosUsuarios', JSON.stringify(novosUsuarios));
 }
 
+// scroll suave
 document.querySelectorAll('nav ul a').forEach(link => {
-    
-    link.addEventListener('click', evento => {
-        evento.preventDefault();
-        const href = link.getAttribute('href');
-        const alvo = document.querySelector(href);
-
-        if (alvo) {
-            window.scroll({
-                top: alvo.offsetTop -40,
-                behavior: 'smooth'
-            });
-        }
-   })
+  link.addEventListener('click', evento => {
+    evento.preventDefault();
+    const href = link.getAttribute('href');
+    const alvo = document.querySelector(href);
+    if (alvo) {
+      window.scroll({
+        top: alvo.offsetTop - 40,
+        behavior: 'smooth'
+      });
+    }
+  });
 });
 
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 100) {
-        menu.forEach( m =>{
-            m.classList.add('shrink');
-        });
-    } else {
-        menu.forEach( m =>{
-            m.classList.remove('shrink');
-        });
-    }
-});
+// login modal
+btnLogin.onclick = function () { login.showModal(); }
+btnFechar.onclick = function () { login.close(); }
 
-btnLogin.onclick = function(){
-    login.showModal();
+// ----------- LOGIN ADMIN -----------
+function logar() {
+  let usuario = document.getElementById('usuario').value;
+  let senha = document.getElementById('senha').value;
+  let msgErro = document.querySelector('.erro');
+  if (msgErro) login.removeChild(msgErro);
+
+  let usuarioValido = dadosUsuarios.find(u => u.nome === usuario && u.senha === senha);
+  if (usuarioValido) {
+    sessionStorage.setItem('usuarioLogado', 'true');
+    sessionStorage.setItem('nomeUsuario', usuario);
+    window.location.href = "./admin/index.html";
+  } else {
+    const erro = document.createElement('label');
+    erro.classList.add('erro');
+    erro.innerText = 'Login ou senha inválido';
+    login.insertBefore(erro, login.firstChild.nextSibling);
+    document.querySelector('#login form').reset();
+  }
 }
 
-btnFechar.onclick = function(){
-    login.close();
+// ----------- FORM: AULA EXPERIMENTAL -----------
+function enviarAgendamento(event) {
+  event.preventDefault();
+
+  const agendamento = {
+    nome: document.getElementById('nome').value,
+    email: document.getElementById('email').value,
+    telefone: document.getElementById('telefone').value,
+    tipoAula: document.getElementById('tipo-aula').value,
+    data: document.getElementById('data').value,
+    hora: document.getElementById('hora').value,
+    observacoes: document.getElementById('observacoes').value
+  };
+
+  let agendamentos = JSON.parse(localStorage.getItem('agendamentos')) || [];
+  agendamentos.push(agendamento);
+  localStorage.setItem('agendamentos', JSON.stringify(agendamentos));
+
+  alert("Aula experimental agendada com sucesso!");
+  document.querySelector("#aula-exp form").reset();
 }
 
-function enviarOrcamento(){
-    let novoNome = nome.value;
-    let novoEmail = email.value;
-    let novoTelefone = telefone.value;
-    let novoDuracao = duracao.value;
-    let novoLocal = local.value;
-    let novoTipo = tipo.value;
-    let novoImpressoes = impressoes.value;
-    let novoQtdeFotos = qtdeFotos.value;
-    let novoDetalhes = detalhes.value;
+// ----------- FORM: AVALIAÇÃO INICIAL -----------
+function enviarAvaliacao(event) {
+  event.preventDefault();
 
-    dadosOrcamentos.push({
-        nome: novoNome,
-        email: novoEmail,
-        telefone: novoTelefone,
-        duracao: novoDuracao,
-        local: novoLocal,
-        tipo: novoTipo,
-        impressoes: novoImpressoes,
-        fotos: novoQtdeFotos,
-        detalhes: novoDetalhes
-    });
+  const avaliacao = {
+    nome: document.getElementById('nome-avaliacao').value,
+    idade: document.getElementById('idade').value,
+    peso: document.getElementById('peso').value,
+    experiencia: document.getElementById('experiencia').value,
+    dieta: document.getElementById('dieta').value,
+    objetivos: document.getElementById('objetivos').value
+  };
 
-    localStorage.setItem('dadosOrcamentos', JSON.stringify(dadosOrcamentos));
-    window.location.href= "../index.html";    
-}
+  let avaliacoes = JSON.parse(localStorage.getItem('avaliacoes')) || [];
+  avaliacoes.push(avaliacao);
+  localStorage.setItem('avaliacoes', JSON.stringify(avaliacoes));
 
-function logar(){
-    let usuario = document.getElementById('usuario').value;
-    let senha = document.getElementById('senha').value;
-    let msgErro = document.querySelector('.erro');
-
-    if(msgErro){
-        login.removeChild(msgErro);
-    } 
-
-    dadosUsuarios.forEach(item =>{
-        if(usuario == item.nome && senha == item.senha){
-            sessionStorage.setItem('usuarioLogado', 'true');
-            sessionStorage.setItem('nomeUsuario', usuario);
-            window.location.href="../admin/index.html";
-        }
-    });
-    
-    var usuarioLogado = sessionStorage.getItem('usuarioLogado');
-
-    if(!usuarioLogado){        
-        erro = document.createElement('label');
-        erro.classList.add('erro');
-        erro.innerText = 'Login ou senha inválido';
-        login.insertBefore(erro, login.firstChild.nextSibling);
-        document.querySelector('#login form').reset();
-    }
+  alert("Avaliação enviada com sucesso!");
+  document.querySelector("#avaliacao-aluno form").reset();
 }

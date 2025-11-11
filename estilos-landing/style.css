@@ -48,15 +48,16 @@ textarea{
 
 button {
     flex-grow: 1;
-    background-color: #007bff;
+    background-color: #0b0986;
     color: #fff;
     border: none;
     padding: 10px 20px;
     margin: 5px;
     cursor: pointer;
+    border-radius: 5px;
 }
 
-button:hover { background-color: #0056b3; }
+button:hover { background-color: #0f0caa; }
 
 button[type="reset"]{ background-color: #f5b049; }
 
@@ -66,7 +67,7 @@ button[type="reset"]:hover{ background-color: #ac7727; }
 nav ul{
     display: flex;
     background-color: #111;
-    background-image: linear-gradient(to bottom, #000, #222);
+    background-image: linear-gradient(to bottom, #000, rgb(32, 1, 32));
     margin: 0;
     border-bottom: 1px solid #000;
     position: fixed;
@@ -79,12 +80,14 @@ nav ul{
 ul a li{
     display: inline-block;
     color: #fff;
+    font-weight: 600;
     padding: 15px 20px;
     transition: padding 0.2s ease-in-out;
 }
 
 ul a li:hover{
-    background-image: linear-gradient(to top, #000, #222);
+    background-image: linear-gradient(to top, #000, rgb(43, 1, 43), rgb(49, 2, 49));
+    border-radius: 8px;
 }
 
 ul a:last-child{
@@ -218,9 +221,9 @@ ul a li.shrink{
     margin-bottom: 20px;
     padding: 10px 40px;
     overflow: hidden;
-    display: flex; /* Parte da avaliação de CSS */ 
-    flex-wrap: wrap; /* Parte da avaliação de CSS */ 
-    justify-content: space-evenly; /* Parte da avaliação de CSS */    
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-evenly;    
 }
 #comentarios h2{ width: 100%;}
 
